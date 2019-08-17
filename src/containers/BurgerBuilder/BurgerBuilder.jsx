@@ -6,7 +6,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -23,16 +23,17 @@ class BurgerBuilder extends Component {
     purchasing: false,
     loading: false,
     error: null
-  };  
+  };
 
   componentDidMount() {
-    axios.get('https://react-burger-f2801.firebaseio.com/ingredients.json')
-         .then(res => {
-           this.setState({ ingredients: res.data });
-         })
-         .catch(err => {
-           this.setState({ error: true });
-         });
+    axios
+      .get("https://react-burger-f2801.firebaseio.com/ingredients.json")
+      .then(res => {
+        this.setState({ ingredients: res.data });
+      })
+      .catch(err => {
+        this.setState({ error: true });
+      });
   }
 
   purchaseHandler = () => {
@@ -95,16 +96,19 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    
     const queryParams = [];
     for (let i in this.state.ingredients) {
-      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
     }
-    queryParams.push('price=', this.state.totalPrice);
-    const queryString = queryParams.join('&');
+    queryParams.push("price=" + this.state.totalPrice);
+    const queryString = queryParams.join("&");
     this.props.history.push({
-      pathname: '/checkout',
-      search: '?' + queryString
+      pathname: "/checkout",
+      search: "?" + queryString
     });
   };
 
@@ -118,7 +122,11 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burger = this.state.error ? <p>Ingredients cannot be loaded!</p> : <Spinner />;
+    let burger = this.state.error ? (
+      <p>Ingredients cannot be loaded!</p>
+    ) : (
+      <Spinner />
+    );
     if (this.state.ingredients) {
       burger = (
         <Aux>

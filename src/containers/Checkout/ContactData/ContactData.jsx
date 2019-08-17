@@ -18,7 +18,6 @@ class ContactData extends Component {
 
   orderHandler = (event) => {
     event.preventDefault();
-    console.log(this.props);
     this.setState({ loading: true });
     const order = {
       ingredients: this.props.ingredients,
@@ -31,14 +30,14 @@ class ContactData extends Component {
           country: "VietNam"
         },
         email: "huyphong@gmail.com"
-      },
+       },
       deliveryMethod: "fastest"
     };
 
     axios
       .post("/orders.json", order)
       .then(res => {
-        this.setState({ loading: false});
+        this.setState({ loading: false });
         this.props.history.push('/');
       })
       .catch(e => {
