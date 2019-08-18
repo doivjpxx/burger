@@ -51,7 +51,7 @@ class ContactData extends Component {
       deliveryMethod: {
         elementType: "select",
         elementConfig: {
-          placeholder: 'asdasd',
+          placeholder: "asdasd",
           options: [
             { value: "fastest", displayValue: "Fastest" },
             { value: "cheapest", displayValue: "Cheapest" }
@@ -83,6 +83,14 @@ class ContactData extends Component {
       });
   };
 
+  inputchangedHandler = (event, input) => {
+    const updateForm = { ...this.state.orderform };
+    const updateElement = { ...updateForm[input] };
+    updateElement.value = event.target.value;
+    updateForm[input] = updateElement;
+    this.setState({ orderform: updateForm });
+  };
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.orderform) {
@@ -101,6 +109,7 @@ class ContactData extends Component {
               elementType={element.config.elementType}
               elementConfig={element.config.elementConfig}
               value={element.config.value}
+              changed={event => this.inputchangedHandler(event, element.id)}
             />
           );
         })}

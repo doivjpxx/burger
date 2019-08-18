@@ -10,6 +10,7 @@ const input = props => {
           className={classes.inputElement}
           {...props.elementConfig}
           defaultValue={props.value}
+          onChange={props.changed}
         />
       );
       break;
@@ -19,6 +20,7 @@ const input = props => {
           className={classes.inputElement}
           {...props.elementConfig}
           defaultValue={props.value}
+          onChange={props.changed}
         />
       );
       break;
@@ -44,6 +46,7 @@ const input = props => {
           className={classes.inputElement}
           {...props.elementConfig}
           defaultValue={props.value}
+          onChange={props.changed}
         />
       );
   }
