@@ -1,7 +1,7 @@
 export {
-addIngredient,
-removeIngredient,
-initIngredients
+  addIngredient,
+  removeIngredient,
+  initIngredients
 } from './burgurBuilder';
 
 export {
@@ -9,3 +9,7 @@ export {
   purchaseBurger,
   fetchOrders
 } from './order';
+
+export {
+  auth
+} from './auth';
