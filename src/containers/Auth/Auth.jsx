@@ -6,6 +6,7 @@ import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import classes from "./Auth.module.css";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import { checkValidation } from '../../shared/utility';
 
 import * as actions from "../../store/actions/index";
 
@@ -50,33 +51,13 @@ class Auth extends Component {
     }
   }
 
-  checkValidation(value, rules) {
-    let isValid = true;
-
-    if (rules) {
-      if (rules.required) {
-        isValid = value.trim() !== "" && isValid;
-      }
-
-      if (rules.minLength) {
-        isValid = value.length >= rules.minLength && isValid;
-      }
-
-      if (rules.maxLength) {
-        isValid = value.length <= rules.maxLength && isValid;
-      }
-    }
-
-    return isValid;
-  }
-
   inputchangedHandler = (event, input) => {
     const updatedControls = {
       ...this.state.controls,
       [input]: {
         ...this.state.controls[input],
         value: event.target.value,
-        valid: this.checkValidation(
+        valid: checkValidation(
           event.target.value,
           this.state.controls[input].validation
         ),

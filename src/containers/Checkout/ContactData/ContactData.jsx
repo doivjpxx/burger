@@ -6,6 +6,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import classes from "./ContactData.module.css";
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import { checkValidation } from '../../../shared/utility';
 import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
@@ -94,26 +95,6 @@ class ContactData extends Component {
     formIsValid: false,
   };
 
-  checkValidation(value, rules) {
-    let isValid = true;
-
-    if (rules) {
-      if (rules.required) {
-        isValid = value.trim() !== "" && isValid;
-      }
-
-      if (rules.minLength) {
-        isValid = value.length >= rules.minLength && isValid;
-      }
-
-      if (rules.maxLength) {
-        isValid = value.length <= rules.maxLength && isValid;
-      }
-    }
-
-    return isValid;
-  }
-
   orderHandler = event => {
     event.preventDefault();
     this.setState({ loading: true });
@@ -135,7 +116,7 @@ class ContactData extends Component {
     const updateForm = { ...this.state.orderform };
     const updateElement = { ...updateForm[input] };
     updateElement.value = event.target.value;
-    updateElement.valid = this.checkValidation(
+    updateElement.valid = checkValidation(
       updateElement.value,
       updateElement.validation
     );
